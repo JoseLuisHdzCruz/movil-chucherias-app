@@ -1,0 +1,35 @@
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px; /* Ajusta el ancho máximo */
+  margin: 0 auto; /* Centrar el carrusel */
+  height: 120px;
+}
+
+.carousel-container img {
+  height: 100px;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.indicator {
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background-color: gray;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicator.active {
+  background-color: blue;
+}

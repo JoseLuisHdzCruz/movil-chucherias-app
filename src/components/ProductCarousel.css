@@ -1,0 +1,43 @@
+.img-card{
+    width: 60%;
+}
+
+.card-carrusel{
+    height: 300px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-prev, .custom-next {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  .custom-prev {
+    left: 10px;
+  }
+  
+  .custom-next {
+    right: 10px;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: auto;
+  }
+  

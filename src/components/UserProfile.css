@@ -1,0 +1,10 @@
+.banner {
+  height: 15rem;
+  width: 15rem;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,29 @@
+/* Cambia el color de los tabs seleccionados a morado */
+.custom-tab[aria-selected="true"] {
+    --color: #800080; /* Morado */
+    --background: #f3e5f5; /* Fondo claro opcional para el tab seleccionado */
+  }
+  
+  /* Cambia el color cuando haces hover sobre los tabs */
+  .custom-tab:hover {
+    --color: #ba68c8; /* Un tono de morado para el hover */
+  }
+  
+  /* Color de los tabs no seleccionados */
+  .custom-tab {
+    --color: #9e9e9e; /* Un color gris para los tabs no seleccionados */
+  }
+
+
+  .img-user{
+    height: 50px;
+  }
+
+  .content{
+    display: flex;
+    align-items: center;
+  }
+
+  .custom-toolbar {
+    --background: #f8c6f9;
+  }

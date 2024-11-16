@@ -1,0 +1,35 @@
+.img-producto{
+    width: 70%;
+}
+
+.card{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.margin-top{
+    margin-top: 20px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .quantity-controls ion-text {
+    margin: 0 10px;
+    font-size: 1.2rem;
+  }
+  
+  .quantity-controls ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --border-radius: 50%;
+    --background: #f4f4f4;
+    --color: #333;
+  }
+  

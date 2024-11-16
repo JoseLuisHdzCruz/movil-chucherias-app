@@ -1,0 +1,16 @@
+.square-card ion-img {
+  width: 70%;
+  height: 150px; /* Ajusta el tamaño según necesites */
+  object-fit: cover;
+}
+
+.square-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.square-card ion-card-header {
+  padding: 10px;
+}

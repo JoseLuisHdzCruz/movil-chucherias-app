@@ -1,0 +1,23 @@
+.custom-toolbar {
+    --background: #f8c6f9;
+    --color: black;
+    height: 75px;
+    display: flex;
+    align-items: center;
+  }
+
+  .icon-container {
+    position: relative; /* Posicionamiento relativo para el badge */
+  }
+  
+  .cart-badge {
+    position: absolute; /* Posicionamiento absoluto para el badge */
+    top: -5px; /* Ajusta según sea necesario */
+    right: -10px; /* Ajusta según sea necesario */
+    font-size: 12px; /* Tamaño del texto */
+    padding: 2px 5px; /* Espaciado del badge */
+  }
+  
+  .text{
+    text-decoration: none;
+  }
