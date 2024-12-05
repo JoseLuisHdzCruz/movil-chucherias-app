@@ -94,5 +94,7 @@ jobs:
 
       # 15. Empujar el archivo APK a Itch.io usando Butler
       - name: Push to Itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY}}  # Usar el secreto aquí
         run: |
-          ./butler push debug/my-app.apk josehdzcruz/chucherias-regalos-huejutla:android --identity ${{ secrets.ITCH_API_KEY }}
+          ./butler push debug/my-app.apk josehdzcruz/chucherias-regalos-huejutla:android
