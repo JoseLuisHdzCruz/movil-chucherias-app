@@ -42,6 +42,11 @@ jobs:
         run: |
           ionic capacitor sync
 
+      # 6.1. Asegurar permisos de ejecución para gradlew
+      - name: Ensure gradlew is executable
+        run: |
+          chmod +x android/gradlew
+
       # 6. Construir el APK usando Gradle
       - name: Build APK using Gradle
         run: |
