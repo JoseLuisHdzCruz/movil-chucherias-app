@@ -90,7 +90,7 @@ jobs:
       - name: Prepare APK for Itch.io
         run: |
             mkdir -p debug
-            cp android/app/build/outputs/apk/release/app-release.apk debug/my-app.apk
+            cp android/app/build/outputs/apk/release/app-release-unsigned.apk debug/my-app.apk
 
       # 15. Empujar el archivo APK a Itch.io usando Butler
       - name: Push to Itch.io
