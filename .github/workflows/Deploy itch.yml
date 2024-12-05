@@ -58,8 +58,8 @@ jobs:
       # 8. Empaquetar el archivo APK generado
       - name: Prepare APK for Itch.io
         run: |
-            mkdir -p debug
-            cp android/app/build/outputs/apk/debug/app-debug.apk debug/my-app.apk
+            mkdir -p release
+            cp android/app/build/outputs/apk/debug/app-release.apk release/my-app.apk
 
       # 9. Empujar el archivo APK a Itch.io usando Butler
       - name: Push to Itch.io
