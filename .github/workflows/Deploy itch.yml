@@ -31,7 +31,11 @@ jobs:
       # 4. Instalar Capacitor y añadir plataforma Android
       - name: Install Capacitor and add Android platform
         run: |
-          ionic capacitor add android
+          if ! npx cap ls | grep -q "android"; then
+            ionic capacitor add android
+          else
+            echo "Android platform already added"
+          fi
 
       # 5. Sincronizar Capacitor y construir APK
       - name: Sync Capacitor and Build APK
