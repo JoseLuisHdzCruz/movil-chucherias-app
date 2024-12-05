@@ -42,41 +42,47 @@ jobs:
         run: |
           ionic capacitor sync
 
-      # 6.1. Asegurar permisos de ejecución para gradlew
+      # 6. Instalar Java 17
+      - name: Install Java 17
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-17-jdk
+
+      # 7. Asegurar permisos de ejecución para gradlew
       - name: Ensure gradlew is executable
         run: |
           chmod +x android/gradlew
 
-      # 6. Construir el APK usando Gradle
+      # 8. Construir el APK usando Gradle
       - name: Build APK using Gradle
         run: |
           cd android
           ./gradlew assembleRelease
 
-      # 7. Listar el directorio de salida del APK
+      # 9. Listar el directorio de salida del APK
       - name: List APK output directory
         run: |
           ls -la android/app/build/outputs/apk/release/
 
-      # 8. Descargar Butler desde broth (servidor recomendado)
+      # 10. Descargar Butler desde broth (servidor recomendado)
       - name: Download Butler
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
           unzip butler.zip
           chmod +x butler
 
-      # 9. Verificar la instalación de Butler
+      # 11. Verificar la instalación de Butler
       - name: Butler version check
         run: |
           ./butler -V
 
-      # 10. Empaquetar el archivo APK generado
+      # 12. Empaquetar el archivo APK generado
       - name: Prepare APK for Itch.io
         run: |
             mkdir -p debug
             cp android/app/build/outputs/apk/release/app-release.apk debug/my-app.apk
 
-      # 11. Empujar el archivo APK a Itch.io usando Butler
+      # 13. Empujar el archivo APK a Itch.io usando Butler
       - name: Push to Itch.io
         run: |
           ./butler push debug/my-app.apk josehdzcruz/chucherias-regalos-huejutla:android --identity ${{ secrets.ITCH_API_KEY }}
