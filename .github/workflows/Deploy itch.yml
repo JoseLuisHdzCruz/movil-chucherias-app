@@ -48,6 +48,12 @@ jobs:
           sudo apt update
           sudo apt install -y openjdk-17-jdk
 
+      # 6.1. Establecer JAVA_HOME
+      - name: Set JAVA_HOME
+        run: |
+          echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
+          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+
       # 7. Asegurar permisos de ejecución para gradlew
       - name: Ensure gradlew is executable
         run: |
