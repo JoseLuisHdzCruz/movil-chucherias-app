@@ -48,47 +48,51 @@ jobs:
           sudo apt update
           sudo apt install -y openjdk-17-jdk
 
-      # 6.1. Establecer JAVA_HOME
+      # 7. Establecer JAVA_HOME y actualizar el PATH
       - name: Set JAVA_HOME
         run: |
-          echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
+          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
           echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
 
-      # 7. Asegurar permisos de ejecución para gradlew
+      # 8. Verificar la versión de Java
+      - name: Check Java version
+        run: java -version
+
+      # 9. Asegurar permisos de ejecución para gradlew
       - name: Ensure gradlew is executable
         run: |
           chmod +x android/gradlew
 
-      # 8. Construir el APK usando Gradle
+      # 10. Construir el APK usando Gradle
       - name: Build APK using Gradle
         run: |
           cd android
           ./gradlew assembleRelease
 
-      # 9. Listar el directorio de salida del APK
+      # 11. Listar el directorio de salida del APK
       - name: List APK output directory
         run: |
           ls -la android/app/build/outputs/apk/release/
 
-      # 10. Descargar Butler desde broth (servidor recomendado)
+      # 12. Descargar Butler desde broth (servidor recomendado)
       - name: Download Butler
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
           unzip butler.zip
           chmod +x butler
 
-      # 11. Verificar la instalación de Butler
+      # 13. Verificar la instalación de Butler
       - name: Butler version check
         run: |
           ./butler -V
 
-      # 12. Empaquetar el archivo APK generado
+      # 14. Empaquetar el archivo APK generado
       - name: Prepare APK for Itch.io
         run: |
             mkdir -p debug
             cp android/app/build/outputs/apk/release/app-release.apk debug/my-app.apk
 
-      # 13. Empujar el archivo APK a Itch.io usando Butler
+      # 15. Empujar el archivo APK a Itch.io usando Butler
       - name: Push to Itch.io
         run: |
           ./butler push debug/my-app.apk josehdzcruz/chucherias-regalos-huejutla:android --identity ${{ secrets.ITCH_API_KEY }}
