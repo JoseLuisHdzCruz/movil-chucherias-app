@@ -37,37 +37,41 @@ jobs:
             echo "Android platform already added"
           fi
 
-      # 5. Sincronizar Capacitor y construir APK
-      - name: Sync Capacitor and Build APK
+      # 5. Sincronizar Capacitor
+      - name: Sync Capacitor
         run: |
           ionic capacitor sync
-          ionic capacitor build android --prod --release
 
-      # 6. Listar el directorio de salida del APK
+      # 6. Construir el APK usando Gradle
+      - name: Build APK using Gradle
+        run: |
+          cd android
+          ./gradlew assembleRelease
+
+      # 7. Listar el directorio de salida del APK
       - name: List APK output directory
         run: |
-          ls -la android/app/build/outputs/apk/androidTest/debug/
           ls -la android/app/build/outputs/apk/release/
 
-      # 7. Descargar Butler desde broth (servidor recomendado)
+      # 8. Descargar Butler desde broth (servidor recomendado)
       - name: Download Butler
         run: |
           curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
           unzip butler.zip
           chmod +x butler
 
-      # 8. Verificar la instalación de Butler
+      # 9. Verificar la instalación de Butler
       - name: Butler version check
         run: |
           ./butler -V
 
-      # 9. Empaquetar el archivo APK generado
+      # 10. Empaquetar el archivo APK generado
       - name: Prepare APK for Itch.io
         run: |
             mkdir -p debug
             cp android/app/build/outputs/apk/release/app-release.apk debug/my-app.apk
 
-      # 10. Empujar el archivo APK a Itch.io usando Butler
+      # 11. Empujar el archivo APK a Itch.io usando Butler
       - name: Push to Itch.io
         run: |
           ./butler push debug/my-app.apk josehdzcruz/chucherias-regalos-huejutla:android --identity ${{ secrets.ITCH_API_KEY }}
