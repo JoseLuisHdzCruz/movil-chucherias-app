@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { IonPage, IonText, IonAvatar, IonAccordion, IonAccordionGroup, IonItem, IonLabel, IonContent } from '@ionic/react';
 import './Tab3.css';
 import LayoutPage from '../components/LayoutPage';

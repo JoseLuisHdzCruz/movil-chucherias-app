@@ -1,0 +1,63 @@
+name: Build and Deploy to Itch.io
+
+on:
+  push:
+    branches:
+      - main  # Despliegue en la rama principal
+
+jobs:
+  deploy:
+    name: Build and Deploy to Itch.io
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # 3. Instalar dependencias y construir
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Ionic CLI
+        run: npm install -g @ionic/cli
+
+      # 4. Instalar Capacitor y añadir plataforma Android
+      - name: Install Capacitor and add Android platform
+        run: |
+          ionic capacitor add android
+
+      # 5. Sincronizar Capacitor y construir APK
+      - name: Sync Capacitor and Build APK
+        run: |
+          ionic capacitor sync
+          ionic capacitor build android --prod --release
+
+      # 6. Descargar Butler desde broth (servidor recomendado)
+      - name: Download Butler
+        run: |
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+
+      # 7. Verificar la instalación de Butler
+      - name: Butler version check
+        run: |
+          ./butler -V
+
+      # 8. Empaquetar el archivo APK generado
+      - name: Prepare APK for Itch.io
+        run: |
+            mkdir -p release
+            cp android/app/build/outputs/apk/debug/app-debug.apk release/my-app.apk
+
+      # 9. Empujar el archivo APK a Itch.io usando Butler
+      - name: Push to Itch.io
+        run: |
+          ./butler push release/my-app.apk josehdzcruz/chucherias-regalos-huejutla:android --identity ${{ secrets.ITCH_API_KEY }}
